@@ -1,18 +1,26 @@
-p {
-  background-color: red;
-  padding: 6px;
-  margin: 10px 0;
-}
+
 
 
 h1 { color: #0b3d91; }
 h2 { color: #0b7d3d; }
+h3 { color: rgb(255, 0, 43); }
 
 
-ul li { color: #333; }
-ol li { color: #222; }
 
+ul li { color: #8c00ff; }
+ol li { color: #ffe600; }
 
+.p1 { color: rgb(0, 119, 6); }
+.p2 { color: #c277ff; }
+.p3 {color: #ff0000; }
+.p4 { color: #0b3d91; }
+
+.color 
+{
+  background-color: red;
+  padding: 6px;
+  margin: 10px 0;
+}
 .codebox {
   font-family: monospace;
   background: #f4f4f4;
