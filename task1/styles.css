@@ -1,0 +1,26 @@
+p {
+  background-color: red;
+  padding: 6px;
+  margin: 10px 0;
+}
+
+
+h1 { color: #0b3d91; }
+h2 { color: #0b7d3d; }
+
+
+ul li { color: #333; }
+ol li { color: #222; }
+
+
+.codebox {
+  font-family: monospace;
+  background: #f4f4f4;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+
+img { max-width: 100%; height: auto; display:block; margin: 12px 0; }
+
+
