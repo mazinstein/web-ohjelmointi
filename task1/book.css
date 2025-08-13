@@ -1,0 +1,28 @@
+body {
+  margin: 0 auto;
+  max-width: 50em;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  line-height: 1.5;
+  padding: 4em 2em; /* увеличенные боковые поля */
+  color: #555;
+  background-color: #f9f9f9;
+  border-left: 10px solid #e0e0e0;  /* левая «рамка» */
+  border-right: 10px solid #e0e0e0; /* правая «рамка» */
+}
+
+h1, h2 {
+  color: #333;
+  margin-top: 2em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+.license {
+  font-size: 0.8em;      /* уменьшенный текст */
+  font-weight: 900;      /* жирный */
+  text-align: center;    /* по центру */
+  color: #444;
+  margin-bottom: 2em;
+}
