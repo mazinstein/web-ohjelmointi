@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Typing Effect */
+    #typing {
+      font-size: 2em;
+      font-weight: bold;
+      border-right: 2px solid #333;
+      white-space: nowrap;
+      overflow: hidden;
+      width: fit-content;
+      margin: 0 auto 20px auto;
+    }
+
+    /* Slide Animation */
+    .slide-left, .slide-right {
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+    .slide-left {
+      transform: translateX(-50px);
+    }
+    .slide-right {
+      transform: translateX(50px);
+    }
+    .show-left {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .show-right {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* About Layout */
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+    .about-container img {
+      width: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .about-text {
+      max-width: 500px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Mazunin Aleksandr</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- About Section -->
+  <section>
+    <h2 id="typing"></h2>
+    <div class="about-container">
+      <div class="slide-left">
+        <img src="images/me.jpg" alt="Aleksandr">
+      </div>
+      <div class="slide-right about-text">
+        <p>Hello! My name is Aleksandr Mazunin, a student at Vuoksi with a passion for web development and design. I enjoy creating modern, responsive, and user-friendly websites that combine functionality with clean aesthetics.</p>
+        <p>In my free time, I explore new technologies, work on personal projects, and improve my coding skills to stay ahead in the ever-evolving tech world.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mazunin Aleksandr</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Burger Menu
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Typing Effect
+    const text = "About Me";
+    let index = 0;
+    function typeEffect() {
+      if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+    window.onload = typeEffect;
+
+    // Slide Animation
+    function animateSlides() {
+      document.querySelectorAll(".slide-left").forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight * 0.8) {
+          el.classList.add("show-left");
+        }
+      });
+      document.querySelectorAll(".slide-right").forEach(el=>{
+        if(el.getBoundingClientRect().top < window.innerHeight * 0.8) {
+          el.classList.add("show-right");
+        }
+      });
+    }
+    window.addEventListener("scroll", animateSlides);
+    window.addEventListener("load", animateSlides);
+  </script>
+</body>
+</html>

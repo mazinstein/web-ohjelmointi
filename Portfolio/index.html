@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Mazunin Aleksandr</div>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <h1>Hello! I'm Aleksandr</h1>
+    <p>Student of Vuoksi</p>
+  </section>
+
+  <!-- Navigation Buttons -->
+  <section class="fade-in navigation-buttons">
+    <a href="about.html" class="btn">About Me</a>
+    <a href="skills.html" class="btn">My Skills</a>
+    <a href="contact.html" class="btn">Contact</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mazunin Aleksandr</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Burger Menu
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Fade-in animation
+    const fadeElements = document.querySelectorAll(".fade-in");
+
+    function checkFade() {
+      const triggerBottom = window.innerHeight * 0.85;
+      fadeElements.forEach(el => {
+        const boxTop = el.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) {
+          el.classList.add("show");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", checkFade);
+    window.addEventListener("load", checkFade);
+  </script>
+</body>
+</html>
