@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lemmikkisivu</title>
+</head>
+<body>
+    <h2>HTML lomakeharjoitus</h2>
+
+    <form>
+        <label for="nimi">Lemmikin nimi:</label><br>
+        <input type="text" id="nimi" name="nimi" value="Karvinen"><br><br>
+
+        <label for="syntyma">Lemmikin syntymäaika</label><br>
+        <input type="date" id="syntyma" name="syntyma" value="1981-01-04"><br><br>
+
+        <label>Lemmikin eläinlaji:</label><br>
+        <input type="radio" name="laji" value="kissa" checked> Kissa<br>
+        <input type="radio" name="laji" value="koira"> Koira<br>
+        <input type="radio" name="laji" value="hamsteri"> Hamsteri<br>
+        <input type="radio" name="laji" value="hamsteri2"> Hamsteri<br>
+        <input type="radio" name="laji" value="kaarme"> Käärme<br><br>
+
+        <label>Lemmikin lempiasiat:</label><br>
+        <input type="checkbox" name="lempiasiat" value="nukkuminen" checked> Nukkuminen<br>
+        <input type="checkbox" name="lempiasiat" value="ruoka" checked> Ruoka<br>
+        <input type="checkbox" name="lempiasiat" value="leikkiminen"> Leikkiminen<br>
+        <input type="checkbox" name="lempiasiat" value="juokseminen"> Juokseminen<br><br>
+
+        <label for="vari">Lemmikin väri:</label><br>
+        <input type="color" id="vari" name="vari" value="#ffa500"><br><br>
+
+        <label for="varusteet">Lemmikin varusteet:</label><br>
+        <select id="varusteet" name="varusteet" multiple>
+            <option value="panta" selected>Panta</option>
+            <option value="hihna" selected>Hihna</option>
+            <option value="kuljetuslaatikko">Kuljetuslaatikko</option>
+            <option value="lelut">Lelut</option>
+        </select><br><br>
+
+        <input type="submit" value="Lähetä">
+        <input type="reset" value="Rese toi">
+    </form>
+</body>
+</html>
