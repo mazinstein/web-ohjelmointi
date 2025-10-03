@@ -13,11 +13,11 @@ function laskeToimituskulut($toimitustapa) {
 }
 
 $yhteenveto = null;
-$maara = 2; // значение по умолчанию
+$maara = 2; 
 $valittu_tapa = "Postipaketti";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // безопасно получаем данные из формы
+   
     $maara = isset($_POST["maara"]) ? intval($_POST["maara"]) : 1;
     if ($maara < 1) $maara = 1;
     $valittu_tapa = isset($_POST["toimitustapa"]) ? $_POST["toimitustapa"] : "Postipaketti";
