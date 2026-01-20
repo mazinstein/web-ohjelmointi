@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Palkkalaskuri</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 40px 16px;
+      color: #111;
+    }
+
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e6e8ec;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+      padding: 22px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 28px;
+      letter-spacing: 0.2px;
+    }
+
+    .sub {
+      margin: 0 0 20px 0;
+      color: #4b5563;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .lang {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .lang button {
+      border: 1px solid #d7dbe2;
+      background: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: #111;
+      transition: 0.15s;
+    }
+
+    .lang button.active {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .lang {
+        justify-content: flex-start;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: #374151;
+      margin: 0 0 6px 0;
+      font-weight: 600;
+    }
+
+    .field {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      border: 1px solid #d7dbe2;
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
+      background: #fff;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 0;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #111827;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform 0.08s, opacity 0.15s;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .error {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      color: #9f1239;
+      font-weight: 700;
+    }
+
+    .result {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid #e6e8ec;
+      background: #f9fafb;
+    }
+
+    .result h2 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+      color: #111827;
+    }
+
+    .rows {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 720px) {
+      .rows {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pill {
+      background: #fff;
+      border: 1px solid #e6e8ec;
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .k {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .v {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .netto-low {
+      color: #b45309;
+    }
+
+    .netto-ok {
+      color: #15803d;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <div class="topbar">
+        <div>
+          <h1 data-i18n="title">Palkkalaskuri</h1>
+        </div>
+        <div class="lang" aria-label="language">
+          <button type="button" id="btnFi">fi</button>
+          <button type="button" id="btnEn">en</button>
+        </div>
+      </div>
+
+      <p class="sub" data-i18n="sub">
+        Syötä tiedot ja laske bruttopalkka, veron määrä ja nettopalkka ilman sivun uudelleenlatausta.
+      </p>
+
+      <div class="grid">
+        <div>
+          <label for="tuntipalkka" data-i18n="wageLabel">Tuntipalkka (€)</label>
+          <input class="field" type="number" id="tuntipalkka" step="0.01" min="0" placeholder="esim. 12.50" data-i18n-ph="wagePh">
+        </div>
+        <div>
+          <label for="tunnit" data-i18n="hoursLabel">Tehdyt tunnit (h)</label>
+          <input class="field" type="number" id="tunnit" step="0.01" min="0" placeholder="esim. 8" data-i18n-ph="hoursPh">
+        </div>
+        <div>
+          <label for="vero" data-i18n="taxLabel">Veroprosentti (%)</label>
+          <input class="field" type="number" id="vero" step="0.01" min="0" placeholder="esim. 25" data-i18n-ph="taxPh">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" onclick="suoritaLaskenta()" data-i18n="btn">Laske</button>
+        <div class="hint" data-i18n="hint">Vinkki: käytä pisteitä desimaaleissa (esim. 12.50).</div>
+      </div>
+
+      <div id="virhe" class="error" data-i18n="error">Tarkista syöttämäsi tiedot.</div>
+
+      <div id="tulosalue" class="result">
+        <h2 data-i18n="resultTitle">Tulos</h2>
+        <div class="rows">
+          <div class="pill">
+            <div class="k" data-i18n="grossKey">Bruttopalkka (€)</div>
+            <div class="v" id="brutto">-</div>
+          </div>
+          <div class="pill">
+            <div class="k" data-i18n="taxKey">Vero (€)</div>
+            <div class="v" id="veromaara">-</div>
+          </div>
+          <div class="pill">
+            <div class="k" data-i18n="netKey">Nettopalkka (€)</div>
+            <div class="v" id="netto">-</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const i18n = {
+      fi: {
+        title: "Palkkalaskuri",
+        sub: "Syötä tiedot ja laske bruttopalkka, veron määrä ja nettopalkka ilman sivun uudelleenlatausta.",
+        wageLabel: "Tuntipalkka (€)",
+        hoursLabel: "Tehdyt tunnit (h)",
+        taxLabel: "Veroprosentti (%)",
+        wagePh: "esim. 12.50",
+        hoursPh: "esim. 8",
+        taxPh: "esim. 25",
+        btn: "Laske",
+        hint: "Vinkki: käytä pisteitä desimaaleissa (esim. 12.50).",
+        error: "Tarkista syöttämäsi tiedot.",
+        resultTitle: "Tulos",
+        grossKey: "Bruttopalkka (€)",
+        taxKey: "Vero (€)",
+        netKey: "Nettopalkka (€)"
+      },
+      en: {
+        title: "Salary Calculator",
+        sub: "Enter values and calculate gross salary, tax amount and net salary without reloading the page.",
+        wageLabel: "Hourly wage (€)",
+        hoursLabel: "Worked hours (h)",
+        taxLabel: "Tax percentage (%)",
+        wagePh: "e.g. 12.50",
+        hoursPh: "e.g. 8",
+        taxPh: "e.g. 25",
+        btn: "Calculate",
+        hint: "Tip: use decimals if needed (e.g. 12.50).",
+        error: "Check your input values.",
+        resultTitle: "Result",
+        grossKey: "Gross salary (€)",
+        taxKey: "Tax (€)",
+        netKey: "Net salary (€)"
+      }
+    };
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem("lang", lang);
+
+      document.getElementById("btnFi").classList.toggle("active", lang === "fi");
+      document.getElementById("btnEn").classList.toggle("active", lang === "en");
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = i18n[lang][key];
+      });
+
+      document.querySelectorAll("[data-i18n-ph]").forEach(el => {
+        const key = el.getAttribute("data-i18n-ph");
+        el.setAttribute("placeholder", i18n[lang][key]);
+      });
+
+      document.title = i18n[lang].title;
+    }
+
+    document.getElementById("btnFi").addEventListener("click", () => setLang("fi"));
+    document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+
+    setLang(localStorage.getItem("lang") === "en" ? "en" : "fi");
+
+    function suoritaLaskenta() {
+      const tuntipalkkaEl = document.getElementById("tuntipalkka");
+      const tunnitEl = document.getElementById("tunnit");
+      const veroEl = document.getElementById("vero");
+
+      const virheEl = document.getElementById("virhe");
+      const tulosAlueEl = document.getElementById("tulosalue");
+
+      const bruttoEl = document.getElementById("brutto");
+      const veroMaaraEl = document.getElementById("veromaara");
+      const nettoEl = document.getElementById("netto");
+
+      const tuntipalkkaRaw = tuntipalkkaEl.value;
+      const tunnitRaw = tunnitEl.value;
+      const veroprosenttiRaw = veroEl.value;
+
+      const tuntipalkka = parseFloat(tuntipalkkaRaw);
+      const tunnit = parseFloat(tunnitRaw);
+      const veroprosentti = parseFloat(veroprosenttiRaw);
+
+      const invalid =
+        tuntipalkkaRaw === "" || tunnitRaw === "" || veroprosenttiRaw === "" ||
+        !isFinite(tuntipalkka) || !isFinite(tunnit) || !isFinite(veroprosentti) ||
+        tuntipalkka < 0 || tunnit < 0 || veroprosentti < 0;
+
+      if (invalid) {
+        virheEl.style.display = "block";
+        tulosAlueEl.style.display = "none";
+        return;
+      }
+
+      virheEl.style.display = "none";
+
+      const brutto = tuntipalkka * tunnit;
+      const veroMaara = brutto * (veroprosentti / 100);
+      const netto = brutto - veroMaara;
+
+      bruttoEl.innerText = brutto.toFixed(2);
+      veroMaaraEl.innerText = veroMaara.toFixed(2);
+      nettoEl.innerText = netto.toFixed(2);
+
+      nettoEl.classList.remove("netto-low", "netto-ok");
+      nettoEl.classList.add(netto < 100 ? "netto-low" : "netto-ok");
+
+      tulosAlueEl.style.display = "block";
+    }
+  </script>
+</body>
+</html>
