@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Shop — Cart Prototype</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 30px auto; padding: 0 16px; }
+        h1 { margin-bottom: 16px; }
+        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+        .product { border: 1px solid #ddd; padding: 14px; border-radius: 6px; background: #fafafa; }
+        .price { font-weight: bold; color: #2c7; margin: 8px 0; }
+        input { width: 70px; padding: 4px; }
+        button { padding: 6px 10px; margin-left: 6px; cursor: pointer; }
+        .cart { margin-top: 30px; border-top: 2px solid #eee; padding-top: 16px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; border-bottom: 1px solid #eee; }
+        th { background: #f3f3f3; }
+        .right { text-align: right; }
+    </style>
+</head>
+<body>
+
+<h1>Simple Shop</h1>
+
+<div class="products" id="product-list"></div>
+
+<section class="cart">
+    <h2>Cart</h2>
+    <div id="cart-contents"></div>
+</section>
+
+<script>
+const products = [
+    { id: 1, name: "Wireless Mouse", price: 19.99 },
+    { id: 2, name: "Mechanical Keyboard", price: 59.90 },
+    { id: 3, name: "USB-C Cable", price: 8.50 },
+    { id: 4, name: "27\" Monitor", price: 189.00 },
+    { id: 5, name: "Laptop Stand", price: 24.75 }
+];
+
+const cart = [];
+
+function formatMoney(v) {
+    return v.toFixed(2) + " €";
+}
+
+const list = document.getElementById("product-list");
+
+products.forEach(function(p) {
+    list.innerHTML += `
+        <div class="product">
+            <h3>${p.name}</h3>
+            <div class="price">Price: ${formatMoney(p.price)}</div>
+            <input type="number" min="1" value="1" id="qty-${p.id}">
+            <button onclick="addToCart(${p.id})">Add</button>
+        </div>
+    `;
+});
+
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    const qty = Number(document.getElementById("qty-" + id).value);
+
+    if (!Number.isInteger(qty) || qty <= 0) return;
+
+    cart.push({
+        name: product.name,
+        unitPrice: product.price,
+        quantity: qty,
+        lineTotal: qty * product.price
+    });
+
+    renderCart();
+}
+
+function renderCart() {
+    const c = document.getElementById("cart-contents");
+
+    if (cart.length === 0) {
+        c.innerHTML = "<p>Your cart is empty.</p>";
+        return;
+    }
+
+    let html = `
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Unit price</th>
+                <th class="right">Qty</th>
+                <th class="right">Sum</th>
+            </tr>
+    `;
+
+    let total = 0;
+
+    cart.forEach(function(item) {
+        html += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${formatMoney(item.unitPrice)}</td>
+                <td class="right">${item.quantity}</td>
+                <td class="right">${formatMoney(item.lineTotal)}</td>
+            </tr>
+        `;
+        total += item.lineTotal;
+    });
+
+    html += `
+        </table>
+        <p style="text-align:right; font-weight:bold;">Total: ${formatMoney(total)}</p>
+    `;
+
+    c.innerHTML = html;
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
