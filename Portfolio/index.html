@@ -7,65 +7,86 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Mazunin Aleksandr</div>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar">
+        <a class="logo" href="index.html">Mazunin Aleksandr</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero fade-in">
-    <h1>Hello! I'm Aleksandr</h1>
-    <p>Student of Vuoksi</p>
-  </section>
+    <main>
+      <section class="hero hero-grid reveal">
+        <div class="hero-text">
+          <p class="eyebrow">Game Development Student</p>
+          <h1>Hello, I’m Aleksandr</h1>
+          <p class="hero-description">
+            I create clean digital experiences and develop interactive projects with Unity and C#.
+            This portfolio presents who I am, what I study, and the skills I continue to build.
+          </p>
+          <div class="hero-actions">
+            <a href="about.html" class="btn btn-primary">About Me</a>
+            <a href="skills.html" class="btn btn-secondary">My Skills</a>
+          </div>
+        </div>
 
-  <!-- Navigation Buttons -->
-  <section class="fade-in navigation-buttons">
-    <a href="about.html" class="btn">About Me</a>
-    <a href="skills.html" class="btn">My Skills</a>
-    <a href="contact.html" class="btn">Contact</a>
-  </section>
+        <div class="hero-card reveal-delay">
+          <div class="hero-card-inner">
+            <p class="mini-label">Currently focused on</p>
+            <h2>Game Development</h2>
+            <ul class="info-list">
+              <li>Unity Development</li>
+              <li>C# Programming</li>
+              <li>UI and UX Thinking</li>
+              <li>Version Control with Git</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Mazunin Aleksandr</p>
-  </footer>
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="section-kicker">Overview</p>
+          <h2>What this portfolio includes</h2>
+        </div>
 
-  <!-- Scripts -->
-  <script>
-    // Burger Menu
-    const menuToggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
+        <div class="grid cards-3">
+          <article class="feature-card">
+            <h3>About Me</h3>
+            <p>Learn more about my background, studies, interests, and future direction in technology and game development.</p>
+            <a href="about.html" class="text-link">Open page</a>
+          </article>
 
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
+          <article class="feature-card">
+            <h3>Skills</h3>
+            <p>See the tools and technologies I use, from front-end basics to programming and design workflows.</p>
+            <a href="skills.html" class="text-link">Open page</a>
+          </article>
 
-    // Fade-in animation
-    const fadeElements = document.querySelectorAll(".fade-in");
+          <article class="feature-card">
+            <h3>Contact</h3>
+            <p>Find simple ways to connect with me through social platforms and communication channels.</p>
+            <a href="contact.html" class="text-link">Open page</a>
+          </article>
+        </div>
+      </section>
+    </main>
 
-    function checkFade() {
-      const triggerBottom = window.innerHeight * 0.85;
-      fadeElements.forEach(el => {
-        const boxTop = el.getBoundingClientRect().top;
-        if (boxTop < triggerBottom) {
-          el.classList.add("show");
-        }
-      });
-    }
+    <footer class="site-footer">
+      <p>© 2025 Mazunin Aleksandr</p>
+    </footer>
+  </div>
 
-    window.addEventListener("scroll", checkFade);
-    window.addEventListener("load", checkFade);
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>

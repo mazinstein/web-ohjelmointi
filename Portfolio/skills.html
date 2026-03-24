@@ -7,55 +7,100 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">Mazunin Aleksandr</div>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar">
+        <a class="logo" href="index.html">Mazunin Aleksandr</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html" class="active">Skills</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <section class="fade-in">
-    <h2>My Skills</h2>
-    <div class="skills-container">
-      <div class="skill-card">
-        <img src="images/html.png" alt="HTML">
-        <h3>HTML5</h3>
-        <p>Creating semantic and clean page structures</p>
-      </div>
-      <div class="skill-card">
-        <img src="images/css.png" alt="CSS">
-        <h3>CSS3</h3>
-        <p>Styling, animations, and responsive design</p>
-      </div>
-      <div class="skill-card">
-        <img src="images/csharp.png" alt="C#">
-        <h3>C#</h3>
-        <p>Object-oriented programming and application development</p>
-      </div>
-      <div class="skill-card">
-        <img src="images/git.png" alt="Git">
-        <h3>Git & GitHub</h3>
-        <p>Version control and collaboration</p>
-      </div>
-      <div class="skill-card">
-        <img src="images/figma.png" alt="Figma">
-        <h3>Figma</h3>
-        <p>Designing and prototyping user interfaces</p>
-      </div>
-    </div>
-  </section>
+    <main>
+      <section class="section reveal">
+        <div class="section-heading center">
+          <p class="section-kicker">Abilities</p>
+          <h1 class="page-title">My Skills</h1>
+          <p class="section-description">
+            These are the tools and technologies I use in my studies and projects.
+          </p>
+        </div>
 
-  <footer>
-    <p>&copy; 2025 My Name</p>
-  </footer>
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <img src="images/html.png" alt="HTML">
+            <h3>HTML5</h3>
+            <p>Creating semantic page structures and organizing content clearly.</p>
+          </article>
+
+          <article class="skill-card reveal">
+            <img src="images/css.png" alt="CSS">
+            <h3>CSS3</h3>
+            <p>Building layouts, responsive pages, and smooth visual interactions.</p>
+          </article>
+
+          <article class="skill-card reveal">
+            <img src="images/csharp.png" alt="C#">
+            <h3>C#</h3>
+            <p>Writing structured object-oriented code for games and applications.</p>
+          </article>
+
+          <article class="skill-card reveal">
+            <img src="images/git.png" alt="Git and GitHub">
+            <h3>Git & GitHub</h3>
+            <p>Managing versions, tracking changes, and working with repositories.</p>
+          </article>
+
+          <article class="skill-card reveal">
+            <img src="images/figma.png" alt="Figma">
+            <h3>Figma</h3>
+            <p>Designing interfaces, planning layouts, and prototyping visual ideas.</p>
+          </article>
+
+          <article class="skill-card reveal">
+            <div class="skill-icon-text">U</div>
+            <h3>Unity</h3>
+            <p>Developing gameplay ideas and interactive systems in a real-time engine.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="section-kicker">Development Approach</p>
+          <h2>How I work</h2>
+        </div>
+
+        <div class="grid cards-3">
+          <article class="feature-card">
+            <h3>Structured</h3>
+            <p>I prefer clean structure, understandable code, and well-organized project files.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Curious</h3>
+            <p>I look for new methods, references, and tools that improve both workflow and results.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Consistent</h3>
+            <p>I focus on steady progress and long-term improvement instead of quick unfinished solutions.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2025 Mazunin Aleksandr</p>
+    </footer>
+  </div>
 
   <script src="main.js"></script>
 </body>

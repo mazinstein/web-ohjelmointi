@@ -7,53 +7,73 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Mazunin Aleksandr</div>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar">
+        <a class="logo" href="index.html">Mazunin Aleksandr</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- Contact Section -->
-  <section class="fade-in contact-section">
-    <h2>Contact Me</h2>
-    <p>Feel free to reach out through any of the platforms below:</p>
+    <main>
+      <section class="section reveal">
+        <div class="section-heading center">
+          <p class="section-kicker">Get in Touch</p>
+          <h1 class="page-title">Contact Me</h1>
+          <p class="section-description">
+            Feel free to reach out through the platforms below.
+          </p>
+        </div>
 
-    <div class="social-icons">
-      <!-- Instagram - Cristiano Ronaldo -->
-      <a href="https://instagram.com/cristiano" target="_blank">
-        <img src="images/instagram.png" alt="Instagram">
-      </a>
-      <!-- Facebook - Elon Musk -->
-      <a href="https://facebook.com/ElonMusk" target="_blank">
-        <img src="images/facebook.png" alt="Facebook">
-      </a>
-      <!-- Telegram -->
-      <a href="https://t.me/yourusername" target="_blank">
-        <img src="images/telegram.png" alt="Telegram">
-      </a>
-      <!-- WhatsApp -->
-      <a href="https://wa.me/yourphonenumber" target="_blank">
-        <img src="images/whatsapp.png" alt="WhatsApp">
-      </a>
-    </div>
-  </section>
+        <div class="contact-panel reveal reveal-delay">
+          <div class="contact-text">
+            <h2>Let’s connect</h2>
+            <p>
+              I am interested in new ideas, collaboration, and opportunities that support my growth as a developer.
+              You can contact me through social platforms or messaging apps.
+            </p>
+          </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Mazunin Aleksandr</p>
-  </footer>
+          <div class="social-grid">
+            <a href="https://instagram.com/yourusername" target="_blank" class="social-card">
+              <img src="images/instagram.png" alt="Instagram">
+              <span>Instagram</span>
+            </a>
 
-  <!-- Scripts -->
+            <a href="https://facebook.com/yourusername" target="_blank" class="social-card">
+              <img src="images/facebook.png" alt="Facebook">
+              <span>Facebook</span>
+            </a>
+
+            <a href="https://t.me/yourusername" target="_blank" class="social-card">
+              <img src="images/telegram.png" alt="Telegram">
+              <span>Telegram</span>
+            </a>
+
+            <a href="https://wa.me/yourphonenumber" target="_blank" class="social-card">
+              <img src="images/whatsapp.png" alt="WhatsApp">
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2025 Mazunin Aleksandr</p>
+    </footer>
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>

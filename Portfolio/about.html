@@ -3,132 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me - Portfolio</title>
+  <title>About - Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Typing Effect */
-    #typing {
-      font-size: 2em;
-      font-weight: bold;
-      border-right: 2px solid #333;
-      white-space: nowrap;
-      overflow: hidden;
-      width: fit-content;
-      margin: 0 auto 20px auto;
-    }
-
-    /* Slide Animation */
-    .slide-left, .slide-right {
-      opacity: 0;
-      transition: all 0.8s ease;
-    }
-    .slide-left {
-      transform: translateX(-50px);
-    }
-    .slide-right {
-      transform: translateX(50px);
-    }
-    .show-left {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .show-right {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* About Layout */
-    .about-container {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-    }
-    .about-container img {
-      width: 250px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .about-text {
-      max-width: 500px;
-      text-align: left;
-    }
-  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Mazunin Aleksandr</div>
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="skills.html">Skills</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="page-shell">
+    <header class="site-header">
+      <nav class="navbar">
+        <a class="logo" href="index.html">Mazunin Aleksandr</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- About Section -->
-  <section>
-    <h2 id="typing"></h2>
-    <div class="about-container">
-      <div class="slide-left">
-        <img src="images/me.jpg" alt="Aleksandr">
-      </div>
-      <div class="slide-right about-text">
-        <p>Hello! My name is Aleksandr Mazunin, a 2nd-year Game Development student. I mainly work with Unity and C#, building interactive and engaging game experiences.</p>
-        <p>I’m always ready to take on new challenges and improve my skills while creating games.</p>
-        <p>I’m open to any kind of experience that helps me grow as a game developer, and I’m excited to keep learning and evolving in this field.</p>
-      </div>
-    </div>
-  </section>
+    <main>
+      <section class="section reveal">
+        <div class="section-heading center">
+          <p class="section-kicker">Profile</p>
+          <h1 class="page-title" id="typing" data-text="About Me"></h1>
+        </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Mazunin Aleksandr</p>
-  </footer>
+        <div class="about-layout">
+          <div class="about-photo reveal">
+            <img src="images/me.jpg" alt="Aleksandr Mazunin">
+          </div>
 
-  <!-- Scripts -->
-  <script>
-    // Burger Menu
-    const menuToggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
-    menuToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
-    });
+          <div class="about-content reveal reveal-delay">
+            <div class="content-card">
+              <p>
+                Hello! My name is Aleksandr Mazunin, and I am a second-year Game Development student.
+                I am especially interested in creating interactive experiences and improving my technical skills through practice.
+              </p>
+              <p>
+                My main focus is Unity and C#, where I enjoy building gameplay systems, experimenting with mechanics,
+                and learning how to turn ideas into functional projects.
+              </p>
+              <p>
+                I am motivated by growth, creativity, and the opportunity to solve problems. I am always open to new experiences
+                that help me improve as a developer and gain a deeper understanding of the industry.
+              </p>
+            </div>
 
-    // Typing Effect
-    const text = "About Me";
-    let index = 0;
-    function typeEffect() {
-      if (index < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeEffect, 100);
-      }
-    }
-    window.onload = typeEffect;
+            <div class="grid cards-2">
+              <article class="info-card">
+                <h3>Education</h3>
+                <p>Game Development student with an active interest in programming, design, and interactive media.</p>
+              </article>
+              <article class="info-card">
+                <h3>Interests</h3>
+                <p>Game systems, UI design, creative problem solving, digital tools, and continuous learning.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    // Slide Animation
-    function animateSlides() {
-      document.querySelectorAll(".slide-left").forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight * 0.8) {
-          el.classList.add("show-left");
-        }
-      });
-      document.querySelectorAll(".slide-right").forEach(el=>{
-        if(el.getBoundingClientRect().top < window.innerHeight * 0.8) {
-          el.classList.add("show-right");
-        }
-      });
-    }
-    window.addEventListener("scroll", animateSlides);
-    window.addEventListener("load", animateSlides);
-  </script>
+      <section class="section reveal">
+        <div class="section-heading">
+          <p class="section-kicker">Personal Focus</p>
+          <h2>What drives me forward</h2>
+        </div>
+
+        <div class="grid cards-3">
+          <article class="feature-card">
+            <h3>Learning by doing</h3>
+            <p>I improve best through hands-on work, building projects, testing ideas, and refining details step by step.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Creative development</h3>
+            <p>I enjoy combining logic and creativity to make experiences that feel clear, engaging, and functional.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Long-term growth</h3>
+            <p>I am building a strong foundation for future opportunities in software and game development.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2025 Mazunin Aleksandr</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
