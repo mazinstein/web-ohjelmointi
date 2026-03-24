@@ -1,120 +1,807 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-    <meta charset="utf-8" />
-    <title>Shop — Cart Prototype</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 900px; margin: 30px auto; padding: 0 16px; }
-        h1 { margin-bottom: 16px; }
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
-        .product { border: 1px solid #ddd; padding: 14px; border-radius: 6px; background: #fafafa; }
-        .price { font-weight: bold; color: #2c7; margin: 8px 0; }
-        input { width: 70px; padding: 4px; }
-        button { padding: 6px 10px; margin-left: 6px; cursor: pointer; }
-        .cart { margin-top: 30px; border-top: 2px solid #eee; padding-top: 16px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 8px; border-bottom: 1px solid #eee; }
-        th { background: #f3f3f3; }
-        .right { text-align: right; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kauppa - Ostoskorin prototyyppi</title>
+  <style>
+    :root {
+      --bg: #f7f3eb;
+      --bg-secondary: #fffaf2;
+      --panel: #fffdf9;
+      --card: #fffaf4;
+      --border: #e7ddd0;
+      --text: #2f2a24;
+      --muted: #7b7064;
+      --accent: #b08968;
+      --accent-hover: #9c7557;
+      --accent-soft: #efe3d3;
+      --success: #6f9b74;
+      --shadow: 0 10px 30px rgba(90, 70, 50, 0.08);
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --transition: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #fffdf8 0%, transparent 35%),
+        linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+
+    .hero {
+      background: rgba(255, 253, 249, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 1.02rem;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .lang-btn.active {
+      background: white;
+      box-shadow: 0 4px 12px rgba(90, 70, 50, 0.08);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(160px, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 24px;
+    }
+
+    .panel {
+      background: rgba(255, 253, 249, 0.95);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: fadeUp 0.7s ease;
+    }
+
+    .panel-header {
+      padding: 22px 22px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .panel-subtitle {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .products {
+      padding: 10px 22px 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .product {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(90, 70, 50, 0.10);
+      border-color: #d8c5af;
+    }
+
+    .product-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+    }
+
+    .product h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .product-desc {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.5;
+      margin: 0 0 12px;
+      min-height: 42px;
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 1.06rem;
+      margin-bottom: 14px;
+      color: var(--accent-hover);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .qty-input {
+      width: 82px;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: white;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .qty-input:focus {
+      border-color: #ccb296;
+      box-shadow: 0 0 0 4px rgba(176, 137, 104, 0.12);
+    }
+
+    .btn {
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 11px 15px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform var(--transition), background var(--transition), opacity var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .cart-body {
+      padding: 10px 22px 22px;
+    }
+
+    .cart-empty {
+      background: var(--card);
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      animation: slideIn 0.35s ease;
+    }
+
+    .cart-item-title {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .cart-item-meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .cart-item-total {
+      font-weight: 700;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .summary {
+      margin-top: 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 6px 0;
+      color: var(--muted);
+    }
+
+    .summary-row.total {
+      margin-top: 4px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: #fffdf9;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--success);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      min-width: 240px;
+      max-width: calc(100% - 40px);
+      transform: translateY(120px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .qty-input,
+      .btn {
+        width: 100%;
+      }
+
+      .hero,
+      .panel-header,
+      .products,
+      .cart-body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hero {
+        padding-top: 22px;
+        padding-bottom: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<h1>Simple Shop</h1>
-
-<div class="products" id="product-list"></div>
-
-<section class="cart">
-    <h2>Cart</h2>
-    <div id="cart-contents"></div>
-</section>
-
-<script>
-const products = [
-    { id: 1, name: "Wireless Mouse", price: 19.99 },
-    { id: 2, name: "Mechanical Keyboard", price: 59.90 },
-    { id: 3, name: "USB-C Cable", price: 8.50 },
-    { id: 4, name: "27\" Monitor", price: 189.00 },
-    { id: 5, name: "Laptop Stand", price: 24.75 }
-];
-
-const cart = [];
-
-function formatMoney(v) {
-    return v.toFixed(2) + " €";
-}
-
-const list = document.getElementById("product-list");
-
-products.forEach(function(p) {
-    list.innerHTML += `
-        <div class="product">
-            <h3>${p.name}</h3>
-            <div class="price">Price: ${formatMoney(p.price)}</div>
-            <input type="number" min="1" value="1" id="qty-${p.id}">
-            <button onclick="addToCart(${p.id})">Add</button>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <h1 id="hero-title">Simple Shop</h1>
+          <p id="hero-text">
+            Add products to the cart, calculate the total automatically, and switch the interface language between Finnish and English.
+          </p>
         </div>
-    `;
-});
 
-function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    const qty = Number(document.getElementById("qty-" + id).value);
+        <div class="lang-switcher" aria-label="Language switcher">
+          <button class="lang-btn active" id="lang-fi">FI</button>
+          <button class="lang-btn" id="lang-en">EN</button>
+        </div>
+      </div>
 
-    if (!Number.isInteger(qty) || qty <= 0) return;
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label" id="stat-products-label">Products</div>
+          <div class="stat-value" id="stat-products-value">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label" id="stat-cart-label">Cart rows</div>
+          <div class="stat-value" id="stat-cart-value">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label" id="stat-total-label">Total</div>
+          <div class="stat-value" id="stat-total-value">0.00 €</div>
+        </div>
+      </div>
+    </section>
 
-    cart.push({
+    <section class="layout">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 id="products-title">Products</h2>
+            <div class="panel-subtitle" id="products-subtitle">Choose a quantity and add an item to the cart</div>
+          </div>
+        </div>
+
+        <div class="products" id="product-list"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 id="cart-title">Cart</h2>
+            <div class="panel-subtitle" id="cart-subtitle">Your selected items and final total</div>
+          </div>
+          <button class="btn btn-secondary" id="clear-cart-btn">Clear cart</button>
+        </div>
+
+        <div class="cart-body" id="cart-contents"></div>
+      </div>
+    </section>
+
+    <div class="footer-note" id="footer-note">
+      This version includes a bilingual interface, dynamic cart updates, and a clean minimal layout.
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const translations = {
+      fi: {
+        pageTitle: "Kauppa - Ostoskorin prototyyppi",
+        heroTitle: "Minimalistinen kauppa",
+        heroText: "Lisää tuotteita ostoskoriin, laske loppusumma automaattisesti ja vaihda käyttöliittymän kieli suomen ja englannin välillä.",
+        statProducts: "Tuotteet",
+        statCart: "Korin rivit",
+        statTotal: "Loppusumma",
+        productsTitle: "Tuotteet",
+        productsSubtitle: "Valitse määrä ja lisää tuote ostoskoriin",
+        cartTitle: "Ostoskori",
+        cartSubtitle: "Valitut tuotteet ja kokonaissumma",
+        clearCart: "Tyhjennä kori",
+        addButton: "Lisää koriin",
+        priceLabel: "Hinta",
+        perPiece: "/ kpl",
+        emptyCart: "Ostoskori on tyhjä.",
+        quantity: "Määrä",
+        unitPrice: "Yksikköhinta",
+        rows: "Korin rivit",
+        totalItems: "Tuotteiden kokonaismäärä",
+        total: "Loppusumma",
+        footer: "Tässä versiossa on kaksikielinen käyttöliittymä, dynaaminen ostoskori ja selkeä minimalistinen ulkoasu.",
+        toastAdded: "lisättiin ostoskoriin.",
+        toastInvalid: "Anna kelvollinen määrä.",
+        toastCleared: "Ostoskori tyhjennettiin.",
+        toastAlreadyEmpty: "Ostoskori on jo tyhjä."
+      },
+      en: {
+        pageTitle: "Shop - Cart Prototype",
+        heroTitle: "Minimalist shop",
+        heroText: "Add products to the cart, calculate the total automatically, and switch the interface language between Finnish and English.",
+        statProducts: "Products",
+        statCart: "Cart rows",
+        statTotal: "Total",
+        productsTitle: "Products",
+        productsSubtitle: "Choose a quantity and add an item to the cart",
+        cartTitle: "Cart",
+        cartSubtitle: "Your selected items and final total",
+        clearCart: "Clear cart",
+        addButton: "Add to cart",
+        priceLabel: "Price",
+        perPiece: "/ pc",
+        emptyCart: "Your cart is empty.",
+        quantity: "Quantity",
+        unitPrice: "Unit price",
+        rows: "Cart rows",
+        totalItems: "Total items",
+        total: "Total",
+        footer: "This version includes a bilingual interface, dynamic cart updates, and a clean minimal layout.",
+        toastAdded: "was added to the cart.",
+        toastInvalid: "Enter a valid quantity.",
+        toastCleared: "Cart was cleared.",
+        toastAlreadyEmpty: "Cart is already empty."
+      }
+    };
+
+    let currentLang = "fi";
+
+    const products = [
+      {
+        id: 1,
+        icon: "🖱️",
+        name: { fi: "Langaton hiiri", en: "Wireless Mouse" },
+        description: {
+          fi: "Kevyt ja tarkka hiiri jokapäiväiseen käyttöön.",
+          en: "A light and precise mouse for everyday use."
+        },
+        price: 19.99
+      },
+      {
+        id: 2,
+        icon: "⌨️",
+        name: { fi: "Mekaaninen näppäimistö", en: "Mechanical Keyboard" },
+        description: {
+          fi: "Tyylikäs näppäimistö hyvällä kirjoitustuntumalla.",
+          en: "A stylish keyboard with a satisfying typing feel."
+        },
+        price: 59.90
+      },
+      {
+        id: 3,
+        icon: "🔌",
+        name: { fi: "USB-C-kaapeli", en: "USB-C Cable" },
+        description: {
+          fi: "Kestävä kaapeli lataukseen ja tiedonsiirtoon.",
+          en: "A durable cable for charging and data transfer."
+        },
+        price: 8.50
+      },
+      {
+        id: 4,
+        icon: "🖥️",
+        name: { fi: '27" näyttö', en: '27" Monitor' },
+        description: {
+          fi: "Selkeä näyttö opiskeluun, työhön ja viihteeseen.",
+          en: "A clear display for studying, work, and entertainment."
+        },
+        price: 189.00
+      },
+      {
+        id: 5,
+        icon: "💻",
+        name: { fi: "Kannettavan teline", en: "Laptop Stand" },
+        description: {
+          fi: "Parantaa ergonomiaa ja pitää työpisteen siistinä.",
+          en: "Improves ergonomics and keeps the workspace tidy."
+        },
+        price: 24.75
+      }
+    ];
+
+    const cart = [];
+
+    const productList = document.getElementById("product-list");
+    const cartContents = document.getElementById("cart-contents");
+    const toast = document.getElementById("toast");
+
+    function t(key) {
+      return translations[currentLang][key];
+    }
+
+    function formatMoney(value) {
+      return value.toFixed(2) + " €";
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    function getCartTotal() {
+      return cart.reduce((sum, item) => sum + item.lineTotal, 0);
+    }
+
+    function getCartQuantity() {
+      return cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+
+    function updateStaticTexts() {
+      document.documentElement.lang = currentLang;
+      document.title = t("pageTitle");
+
+      document.getElementById("hero-title").textContent = t("heroTitle");
+      document.getElementById("hero-text").textContent = t("heroText");
+
+      document.getElementById("stat-products-label").textContent = t("statProducts");
+      document.getElementById("stat-cart-label").textContent = t("statCart");
+      document.getElementById("stat-total-label").textContent = t("statTotal");
+
+      document.getElementById("products-title").textContent = t("productsTitle");
+      document.getElementById("products-subtitle").textContent = t("productsSubtitle");
+
+      document.getElementById("cart-title").textContent = t("cartTitle");
+      document.getElementById("cart-subtitle").textContent = t("cartSubtitle");
+      document.getElementById("clear-cart-btn").textContent = t("clearCart");
+
+      document.getElementById("footer-note").textContent = t("footer");
+    }
+
+    function renderProducts() {
+      productList.innerHTML = "";
+
+      products.forEach((product, index) => {
+        const card = document.createElement("article");
+        card.className = "product";
+        card.style.animationDelay = `${index * 0.05}s`;
+
+        card.innerHTML = `
+          <div class="product-icon">${product.icon}</div>
+          <h3>${product.name[currentLang]}</h3>
+          <p class="product-desc">${product.description[currentLang]}</p>
+          <div class="price">${t("priceLabel")}: ${formatMoney(product.price)} ${t("perPiece")}</div>
+          <div class="controls">
+            <input class="qty-input" type="number" min="1" step="1" value="1" id="qty-${product.id}" aria-label="${t("quantity")}">
+            <button class="btn btn-primary" data-id="${product.id}">${t("addButton")}</button>
+          </div>
+        `;
+
+        productList.appendChild(card);
+      });
+
+      document.getElementById("stat-products-value").textContent = products.length;
+    }
+
+    function renderCart() {
+      if (cart.length === 0) {
+        cartContents.innerHTML = `<div class="cart-empty">${t("emptyCart")}</div>`;
+        document.getElementById("stat-cart-value").textContent = "0";
+        document.getElementById("stat-total-value").textContent = formatMoney(0);
+        return;
+      }
+
+      const list = document.createElement("div");
+      list.className = "cart-list";
+
+      cart.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+          <div>
+            <div class="cart-item-title">${item.name[currentLang]}</div>
+            <div class="cart-item-meta">
+              ${t("unitPrice")}: ${formatMoney(item.unitPrice)}<br>
+              ${t("quantity")}: ${item.quantity}
+            </div>
+          </div>
+          <div class="cart-item-total">${formatMoney(item.lineTotal)}</div>
+        `;
+        list.appendChild(div);
+      });
+
+      const total = getCartTotal();
+      const quantity = getCartQuantity();
+
+      const summary = document.createElement("div");
+      summary.className = "summary";
+      summary.innerHTML = `
+        <div class="summary-row">
+          <span>${t("totalItems")}</span>
+          <span>${quantity}</span>
+        </div>
+        <div class="summary-row">
+          <span>${t("rows")}</span>
+          <span>${cart.length}</span>
+        </div>
+        <div class="summary-row total">
+          <span>${t("total")}</span>
+          <span>${formatMoney(total)}</span>
+        </div>
+      `;
+
+      cartContents.innerHTML = "";
+      cartContents.appendChild(list);
+      cartContents.appendChild(summary);
+
+      document.getElementById("stat-cart-value").textContent = cart.length;
+      document.getElementById("stat-total-value").textContent = formatMoney(total);
+    }
+
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      const qtyInput = document.getElementById(`qty-${id}`);
+      const qty = Number(qtyInput.value);
+
+      if (!Number.isInteger(qty) || qty <= 0) {
+        showToast(t("toastInvalid"));
+        qtyInput.focus();
+        return;
+      }
+
+      cart.push({
         name: product.name,
         unitPrice: product.price,
         quantity: qty,
         lineTotal: qty * product.price
-    });
+      });
 
-    renderCart();
-}
-
-function renderCart() {
-    const c = document.getElementById("cart-contents");
-
-    if (cart.length === 0) {
-        c.innerHTML = "<p>Your cart is empty.</p>";
-        return;
+      qtyInput.value = 1;
+      renderCart();
+      showToast(product.name[currentLang] + " " + t("toastAdded"));
     }
 
-    let html = `
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Unit price</th>
-                <th class="right">Qty</th>
-                <th class="right">Sum</th>
-            </tr>
-    `;
+    function clearCart() {
+      if (cart.length === 0) {
+        showToast(t("toastAlreadyEmpty"));
+        return;
+      }
 
-    let total = 0;
+      cart.length = 0;
+      renderCart();
+      showToast(t("toastCleared"));
+    }
 
-    cart.forEach(function(item) {
-        html += `
-            <tr>
-                <td>${item.name}</td>
-                <td>${formatMoney(item.unitPrice)}</td>
-                <td class="right">${item.quantity}</td>
-                <td class="right">${formatMoney(item.lineTotal)}</td>
-            </tr>
-        `;
-        total += item.lineTotal;
+    function setLanguage(lang) {
+      currentLang = lang;
+
+      document.getElementById("lang-fi").classList.toggle("active", lang === "fi");
+      document.getElementById("lang-en").classList.toggle("active", lang === "en");
+
+      updateStaticTexts();
+      renderProducts();
+      renderCart();
+    }
+
+    productList.addEventListener("click", function(event) {
+      const button = event.target.closest("button[data-id]");
+      if (!button) return;
+
+      addToCart(Number(button.dataset.id));
     });
 
-    html += `
-        </table>
-        <p style="text-align:right; font-weight:bold;">Total: ${formatMoney(total)}</p>
-    `;
+    document.getElementById("clear-cart-btn").addEventListener("click", clearCart);
+    document.getElementById("lang-fi").addEventListener("click", () => setLanguage("fi"));
+    document.getElementById("lang-en").addEventListener("click", () => setLanguage("en"));
 
-    c.innerHTML = html;
-}
-
-renderCart();
-</script>
-
+    updateStaticTexts();
+    renderProducts();
+    renderCart();
+  </script>
 </body>
 </html>
