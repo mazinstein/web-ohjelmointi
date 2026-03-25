@@ -19,7 +19,7 @@ function navLinkClass($file, $currentPage) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Starbucks Journal</title>
-  <link rel="stylesheet" href="starbucks.css">
+  <link rel="stylesheet" href="starbucks.css?v=<?php echo filemtime('starbucks.css'); ?>">
 </head>
 <body>
   <div class="page-shell">
