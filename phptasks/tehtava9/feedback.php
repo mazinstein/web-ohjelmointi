@@ -76,26 +76,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   if (empty($errors)) {
-    $successMessage = 'Thank you! Your feedback has been received successfully.';
+    $successMessage = 'Thank you. Your coffee experience has been submitted successfully.';
     $ratingMessage = ratingText($rating);
   }
 }
 ?>
 
-<section class="page-top reveal">
+<section class="page-intro reveal">
   <div class="container narrow">
-    <p class="section-kicker">Feedback</p>
-    <h1>Share your experience</h1>
-    <p class="section-description">
-      This page demonstrates PHP validation, conditions, functions, arrays, loops, and different input elements.
+    <p class="eyebrow">Feedback</p>
+    <h1>Share your coffee experience</h1>
+    <p class="section-text">
+      This page demonstrates PHP form handling with validation, conditions, functions,
+      arrays, loops, and multiple input types.
     </p>
   </div>
 </section>
 
 <section class="section reveal">
-  <div class="container feedback-layout">
-    <div class="form-card">
-      <h2>Customer feedback form</h2>
+  <div class="container feedback-editorial">
+    <div class="form-panel">
+      <h2>Experience form</h2>
 
       <?php if (!empty($errors)): ?>
         <div class="alert alert-error">
@@ -162,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
           <label class="inline-check">
             <input type="checkbox" name="newsletter" value="yes" <?php echo $newsletter === 'yes' ? 'checked' : ''; ?>>
-            Subscribe to newsletter
+            Subscribe to coffee updates
           </label>
         </div>
 
@@ -171,12 +172,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <textarea id="message" name="message" rows="6"><?php echo clean($message); ?></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary full-width">Submit Feedback</button>
+        <button type="submit" class="btn btn-dark full-width">Submit Feedback</button>
       </form>
     </div>
 
-    <aside class="summary-card">
-      <h2>Submitted preview</h2>
+    <aside class="summary-panel">
+      <p class="card-tag">Preview</p>
+      <h2>Submitted details</h2>
       <div class="summary-list">
         <div><strong>Name:</strong> <?php echo clean($name ?: '-'); ?></div>
         <div><strong>Email:</strong> <?php echo clean($email ?: '-'); ?></div>
@@ -185,10 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div><strong>Rating:</strong> <?php echo clean($rating ?: '-'); ?></div>
         <div><strong>Rating Meaning:</strong> <?php echo clean($ratingMessage ?: ratingText($rating)); ?></div>
         <div><strong>Newsletter:</strong> <?php echo $newsletter === 'yes' ? 'Yes' : 'No'; ?></div>
-        <div>
-          <strong>Visit Days:</strong>
-          <?php echo !empty($visitDays) ? clean(implode(', ', $visitDays)) : '-'; ?>
-        </div>
+        <div><strong>Visit Days:</strong> <?php echo !empty($visitDays) ? clean(implode(', ', $visitDays)) : '-'; ?></div>
         <div><strong>Message:</strong> <?php echo clean($message ?: '-'); ?></div>
       </div>
     </aside>

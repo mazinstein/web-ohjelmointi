@@ -1,34 +1,41 @@
 <?php include "header.php"; ?>
 
-<section class="page-top reveal">
+<section class="page-intro reveal">
   <div class="container narrow">
-    <p class="section-kicker">About Starbucks</p>
-    <h1>Brand story and identity</h1>
-    <p class="section-description">
-      Starbucks is known for premium coffee, recognizable design, and a café experience built around quality and comfort.
+    <p class="eyebrow">Brand story</p>
+    <h1>The story behind the cup</h1>
+    <p class="section-text">
+      Starbucks became globally recognizable by combining premium coffee, strong branding,
+      and a café atmosphere built around everyday experience.
     </p>
   </div>
 </section>
 
 <section class="section reveal">
-  <div class="container grid cards-2">
-    <article class="soft-card">
-      <h2>Background</h2>
+  <div class="container story-layout">
+    <article class="story-card">
+      <p class="card-tag">Origins</p>
+      <h2>From Seattle to a global coffee identity</h2>
       <p>
-        Starbucks was founded in 1971 in Seattle, Washington. Over the years, it grew into one of the most recognized coffeehouse brands in the world.
+        Starbucks was founded in 1971 in Seattle, Washington. Over the decades,
+        it developed into one of the most recognized coffeehouse brands in the world.
       </p>
       <p>
-        The company built its identity through high-quality products, strong branding, and a customer experience that feels consistent and modern.
+        Beyond beverages, the brand became associated with a particular lifestyle:
+        familiar spaces, premium positioning, and a café culture that feels modern and accessible.
       </p>
     </article>
 
-    <article class="soft-card">
-      <h2>Mission</h2>
+    <article class="story-card">
+      <p class="card-tag">Mission</p>
+      <h2>More than a drink</h2>
       <p>
-        Starbucks aims to inspire and nurture the human spirit — one person, one cup, and one neighborhood at a time.
+        Starbucks aims to inspire and nurture the human spirit — one person,
+        one cup, and one neighborhood at a time.
       </p>
       <p>
-        This idea is reflected in the brand’s focus on atmosphere, service, and everyday café culture.
+        That mission is reflected in the idea that coffee can be part of comfort,
+        productivity, social moments, and everyday routine.
       </p>
     </article>
   </div>
@@ -37,24 +44,27 @@
 <section class="section reveal">
   <div class="container">
     <div class="section-heading">
-      <p class="section-kicker">Core values</p>
-      <h2>What makes the experience recognizable</h2>
+      <p class="eyebrow">Identity</p>
+      <h2>What defines the Starbucks experience</h2>
     </div>
 
-    <div class="grid cards-3">
-      <article class="soft-card">
-        <h3>Quality</h3>
-        <p>Carefully selected beans, well-balanced recipes, and consistent service standards.</p>
+    <div class="cards-3 grid">
+      <article class="editorial-card">
+        <span class="card-tag">Quality</span>
+        <h3>Consistency in flavor and presentation</h3>
+        <p>Products are designed to feel recognizable, balanced, and professionally prepared.</p>
       </article>
 
-      <article class="soft-card">
-        <h3>Community</h3>
-        <p>Cafés are designed to feel welcoming for study, work, small meetings, and daily routines.</p>
+      <article class="editorial-card">
+        <span class="card-tag">Space</span>
+        <h3>A place to pause between daily tasks</h3>
+        <p>The café environment supports reading, work, meetings, and small moments of rest.</p>
       </article>
 
-      <article class="soft-card">
-        <h3>Innovation</h3>
-        <p>Seasonal drinks, evolving menus, and modern customer experiences keep the brand current.</p>
+      <article class="editorial-card">
+        <span class="card-tag">Visual Style</span>
+        <h3>Recognizable branding with warmth</h3>
+        <p>Material choices, packaging, menu design, and interiors help shape a cohesive identity.</p>
       </article>
     </div>
   </div>

@@ -5,37 +5,37 @@ $menuItems = [
   [
     'name' => 'Caffè Latte',
     'category' => 'Hot Coffee',
-    'description' => 'Rich espresso with steamed milk and a soft, balanced finish.',
+    'description' => 'Espresso and steamed milk with a smooth, familiar finish.',
     'price' => 4.90
   ],
   [
     'name' => 'Cappuccino',
     'category' => 'Hot Coffee',
-    'description' => 'Espresso with silky steamed milk and thick foam.',
+    'description' => 'A classic espresso drink with milk and rich foam.',
     'price' => 4.70
   ],
   [
     'name' => 'Caramel Macchiato',
-    'category' => 'Signature Drink',
-    'description' => 'Espresso, vanilla notes, milk, and caramel drizzle.',
+    'category' => 'Signature',
+    'description' => 'Vanilla notes, espresso, milk, and caramel drizzle.',
     'price' => 5.60
   ],
   [
     'name' => 'Cold Brew',
     'category' => 'Cold Coffee',
-    'description' => 'Smooth and refreshing coffee brewed slowly for a clean taste.',
+    'description' => 'Slow-steeped coffee with a smooth and refreshing taste.',
     'price' => 4.80
   ],
   [
     'name' => 'Mocha Frappuccino',
-    'category' => 'Frappuccino',
-    'description' => 'Blended coffee drink with chocolate flavor and whipped topping.',
+    'category' => 'Blended',
+    'description' => 'Chocolate-forward blended coffee with whipped topping.',
     'price' => 5.90
   ],
   [
     'name' => 'Green Tea Lemonade',
     'category' => 'Refreshers',
-    'description' => 'A bright and refreshing tea-based citrus drink.',
+    'description' => 'A bright tea-based drink with citrus freshness.',
     'price' => 4.40
   ]
 ];
@@ -45,26 +45,27 @@ function formatPrice($price) {
 }
 ?>
 
-<section class="page-top reveal">
+<section class="page-intro reveal">
   <div class="container narrow">
-    <p class="section-kicker">Menu</p>
-    <h1>Featured drinks</h1>
-    <p class="section-description">
-      A sample product collection presented using PHP arrays, a loop, and reusable card components.
+    <p class="eyebrow">Selection</p>
+    <h1>Signature drinks</h1>
+    <p class="section-text">
+      A curated menu presented through PHP arrays and loops, styled as an editorial product selection.
     </p>
   </div>
 </section>
 
 <section class="section reveal">
-  <div class="container menu-grid">
+  <div class="container menu-layout">
     <?php foreach ($menuItems as $item): ?>
-      <article class="menu-card">
-        <span class="menu-tag"><?php echo $item['category']; ?></span>
+      <article class="selection-card">
+        <div class="selection-top">
+          <span class="card-tag"><?php echo $item['category']; ?></span>
+          <span class="price-chip"><?php echo formatPrice($item['price']); ?></span>
+        </div>
+
         <h2><?php echo $item['name']; ?></h2>
         <p><?php echo $item['description']; ?></p>
-        <div class="menu-bottom">
-          <span class="menu-price"><?php echo formatPrice($item['price']); ?></span>
-        </div>
       </article>
     <?php endforeach; ?>
   </div>

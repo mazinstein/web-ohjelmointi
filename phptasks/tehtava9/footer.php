@@ -2,22 +2,26 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div class="footer-copy">
-      <h3>Starbucks Experience</h3>
-      <p>A responsive multi-page PHP website with shared layout, reusable components, and interactive form handling.</p>
+    <div class="footer-block">
+      <p class="footer-label">Starbucks Journal</p>
+      <h3>A multi-page PHP coffee website</h3>
+      <p>
+        Built as a course project with shared PHP layout, reusable navigation,
+        responsive design, and interactive form handling.
+      </p>
     </div>
 
-    <div class="footer-nav">
-      <a href="index.php">Home</a>
-      <a href="about.php">About</a>
-      <a href="menu.php">Menu</a>
-      <a href="contact.php">Contact</a>
+    <div class="footer-links">
+      <a href="index.php">Journal</a>
+      <a href="about.php">Story</a>
+      <a href="menu.php">Selection</a>
+      <a href="contact.php">Visit</a>
       <a href="feedback.php">Feedback</a>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 Starbucks Experience | Task 9</p>
+    <p>© 2025 Starbucks Journal | PHP Task 9</p>
   </div>
 </footer>
 </div>

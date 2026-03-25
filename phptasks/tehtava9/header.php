@@ -2,10 +2,10 @@
 $currentPage = basename($_SERVER['PHP_SELF']);
 
 $navigation = [
-  'index.php' => 'Home',
-  'about.php' => 'About',
-  'menu.php' => 'Menu',
-  'contact.php' => 'Contact',
+  'index.php' => 'Journal',
+  'about.php' => 'Story',
+  'menu.php' => 'Selection',
+  'contact.php' => 'Visit',
   'feedback.php' => 'Feedback'
 ];
 
@@ -18,7 +18,7 @@ function navLinkClass($file, $currentPage) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starbucks Experience</title>
+  <title>Starbucks Journal</title>
   <link rel="stylesheet" href="starbucks.css">
 </head>
 <body>
@@ -26,14 +26,14 @@ function navLinkClass($file, $currentPage) {
     <header class="site-header">
       <div class="container header-inner">
         <a href="index.php" class="brand">
-          <div class="brand-badge">S</div>
-          <div class="brand-text">
-            <span class="brand-title">Starbucks Experience</span>
-            <span class="brand-subtitle">PHP Study Project</span>
+          <span class="brand-mark">SJ</span>
+          <div class="brand-copy">
+            <span class="brand-name">Starbucks Journal</span>
+            <span class="brand-tag">Coffee, comfort, and everyday rituals</span>
           </div>
         </a>
 
-        <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
           <span></span>
           <span></span>
           <span></span>
